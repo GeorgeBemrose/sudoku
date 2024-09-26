@@ -4,142 +4,143 @@ import Box from '@mui/material/Box';
 import { Button, Grid2, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
-//I want a 3x3 grid of 3x3 squares
-//I want to be able to enter a number into each of the squares
-//some squares are pre-populated
-//I want a submit button which validates the game is done
-
+import SudokuBoard from '../components/sudoku';
 
 export default function Home() {
-  // let sudoku = [[0,0,4,0,5,0,9,7,3],[2,0,7,4,6,0,0,0,0],[8,3,0,1,0,0,4,0,0],[0,0,0,0,8,0,0,0,6],[0,2,6,5,7,1,0,4,0],[0,1,3,0,0,0,2,5,0],[8,9,0,4,0,0,6,0,5],[0,0,2,0,1,8,0,0,4],[0,0,7,5,6,0,0,0,1]]
-  let initial_sudoku = [[0,0,4,0,5,0,9,7,3],[2,0,7,4,6,0,0,0,0],[8,3,0,1,0,0,4,0,0],[0,0,0,0,8,0,0,0,6],[0,2,6,5,7,1,0,4,0],[0,1,3,0,0,0,2,5,0],[8,9,0,4,0,0,6,0,5],[0,0,2,0,1,8,0,0,4],[0,0,7,5,6,0,0,0,1]]
-  let [sudoku,setSudoku] = useState<number[][]>(initial_sudoku);
-  
 
-  const checkCols = (): boolean => {
-    let sum: number
-    // for(var k: number = 0; k < sudoku.length; k++){
-      sum = 0
-      let k = 1;
-      for(var i: number = 0; i <= 6; i=i+3){
-        for(var j: number = k; j <= k+6; j=j+3){
-          console.log(i,",",j,":",sudoku[i][j])
-          sum += sudoku[i][j]
-          //insert set and confirm no duplicate numbers
+  let initial_sudoku: number[][] = [[0, 0, 4, 0, 5, 0, 9, 7, 3], [2, 0, 7, 4, 6, 0, 0, 0, 0], [8, 3, 0, 1, 0, 0, 4, 0, 0],
+  [0, 0, 0, 0, 8, 0, 0, 0, 6], [0, 2, 6, 5, 7, 1, 0, 4, 0], [0, 1, 3, 0, 0, 0, 2, 5, 0],
+  [8, 9, 0, 4, 0, 0, 6, 0, 5], [0, 0, 2, 0, 1, 8, 0, 0, 4], [0, 0, 7, 5, 6, 0, 0, 0, 1]]
+
+  let complete_sudoku: number[][] = [
+    [1, 6, 4,
+      2, 5, 8,
+      9, 7, 3], [2, 9, 7, 4, 6, 3, 1, 8, 5], [8, 3, 5, 1, 7, 9, 4, 2, 6],
+    [5, 4, 9,
+      3, 8, 2,
+      7, 1, 6], [8, 2, 6, 5, 7, 1, 3, 4, 9], [7, 1, 3, 6, 9, 4, 2, 5, 8],
+    [8, 9, 1,
+      4, 3, 7,
+      6, 2, 5], [6, 5, 2, 9, 1, 8, 7, 3, 4], [3, 4, 7, 5, 6, 2, 9, 8, 1]
+  ]
+
+
+
+  let [sudoku, setSudoku] = useState<number[][]>(initial_sudoku);
+
+  const checkCols = (board: number[][]): boolean => {
+    let sum: number;
+
+    for (var a: number = 0; a <= 2; a++) {
+      for (var c: number = 0; c <= 2; c++) {
+
+        sum = 0;
+        let set: Set<number> = new Set();
+
+        for (var b: number = a; b <= a + 6; b = b + 3) {
+          for (var d: number = c; d <= c + 6; d = d + 3) {
+
+            sum += board[b][d]
+            set.add(board[b][d])
+          }
+        }
+        if (sum != 45 || set.size != 9) {
+          return false;
         }
       }
-      console.log(sum)
-      if(sum === 45){
-        return true;
-      }
-    // }
-
-    return false;
-  }
-  
-
-  const handleChange = (indexi: number, indexj: number) => e => {
-    const value = e.target.value;
-    const nextSudoku = sudoku.map((grid,indexi_new) => {
-      if (indexi_new !== indexi){
-        return grid;
-      }
-      return grid.map((item,indexj_new)=>{
-       
-        if(indexj === indexj_new){
-          return Number(e.target.value);
-        }
-        return item;
-        
-      })
-    })
-    setSudoku(nextSudoku)
-  }
-
-  const checkArray = (sum: number, i: number ): boolean => {
-    console.log("sum: ",sum, ", i: ", i)
-    if (sum != 45){
-      console.log("Invalid submission - sum")
-      return false;
     }
-    let arrSet: Set<number> = new Set(sudoku[i])
-    console.log(arrSet.size)
-    if(arrSet.size < 9){
-      console.log("Invalid submission")
-      return false;
+
+    return true;
+  }
+
+  const checkRows = (board: number[][]): boolean => {
+    let row: number[]
+
+    for (var i: number = 0; i <= 6; i = i + 3) {
+
+      for (var k: number = 0; k <= 6; k = k + 3) {
+
+        row = board[i].slice(k, k + 3).concat(board[i + 1].slice(k, k + 3), board[i + 2].slice(k, k + 3));
+        const sum = row.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        let rowSet: Set<number> = new Set(row)
+
+        if (sum != 45 || rowSet.size != 9) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+
+  const checkGrid = (board: number[][]): boolean => {
+    //Check that all 3x3 grids are correct
+    for (var i = 0; i < board.length; i++) {
+      const sum: number = board[i].reduce(
+        (accumulator: number, currentValue: number) => accumulator + currentValue,
+      );
+      if (sum != 45) {
+        return false;
+      }
+      let arrSet: Set<number> = new Set(sudoku[i])
+
+      if (arrSet.size < 9) {
+        return false;
+      }
     }
     return true;
   }
 
   const handleSubmit = () => {
-    if(checkCols()){
-      console.log("True")
-    } else {
-      console.log("false")
+    let board = sudoku
+    if (checkRows(board) && checkCols(board) && checkGrid(board)) {
+      console.log("true")
+    }
+    console.log("false")
+
+  }
+
+  const handleChange = (indexi: number, indexj: number) => e => {
+    const value = e.target.value;
+    if (value.length > 1){
       return;
     }
-    // console.log('Submit')
-    // //Check that all 3x3 grids are correct
-    // for(var i = 0; i < sudoku.length; i++){
-    //   console.log(i,", ",sudoku[i])
-    //   const sum: number = sudoku[i].reduce(
-    //     (accumulator: number, currentValue:number) => accumulator + currentValue,
-    //   );
+    const nextSudoku = sudoku.map((grid, indexi_new) => {
+      if (indexi_new !== indexi) {
+        return grid;
+      }
+      return grid.map((item, indexj_new) => {
 
-    //   if(!checkArray(sum,i)){
-    //     return;
-    //   }
-    // }
+        if (indexj === indexj_new) {
+          return Number(e.target.value);
+        }
+        return item;
 
-
-    //Check that each row is correct
-      //For each grid, of index i = 0, 3, 6 we need to check that rows with starting index j = 0, 3, 6 are correct
-        //so to check from 0 to the 9th index of the row, we need to look at other grids
-          // i = 0 to 2, j = 0 to 2
-          // for i in range (0,2){
-
-         // }
-      //Loop through grids 0, 3, 6
-      // for(var i = 0; i < sudoku.length; i=i+3){
-      //   console.log(i,", ",sudoku[i], "2")
-      //   //Loop through each row
-      //   for(var j = 0; j < sudoku[i].length; j=j+3){
-      //     console.log(j,", ",sudoku[i][j])
-      //     //Loop along that row
-      //     for(var k = j; k < sudoku[i].length; ){
-
-      //     }
-      //   }
-      //   const sum: number = sudoku[i].reduce(
-      //     (accumulator: number, currentValue:number) => accumulator + currentValue,
-      //   );
-
-      //   if(!checkArray(sum,i)){
-      //     return;
-      //   }
-      // }
-    //Check that each column is correct
+      })
+    })
+    setSudoku(nextSudoku)
   }
-  
-  return (<>
-  <Container maxWidth="sm">
-    <p className="text-3xl justify-center">Sudoku</p>
 
+  return (<>
+    <Container maxWidth="sm">
+      <p className="text-3xl justify-center">Sudoku</p>
+      <SudokuBoard/>
       <Box className="grid grid-cols-3 grid-rows-3">
-        {sudoku.map((i,indexi) => (
-            <div key={indexi} className="grid grid-cols-3 grid-rows-3 p-2">
-              {i.map((j,indexj) => (
-                <TextField onChange={handleChange(indexi, indexj)} key={indexi+","+indexj} value={j === 0 ? '' : j} size='small' disabled={initial_sudoku[indexi][indexj] != 0} className="size-10"/>
-              ))}
-            </div>
+        {sudoku.map((i, indexi) => (
+          <div key={indexi} className="grid grid-cols-3 grid-rows-3 p-2">
+            {i.map((j, indexj) => (
+              <TextField onChange={handleChange(indexi, indexj)} key={indexi + "," + indexj} value={j === 0 ? '' : j} autoComplete='off' size='small' disabled={initial_sudoku[indexi][indexj] != 0} className="size-10" />
+            ))}
+          </div>
         ))}
       </Box>
       <Box className="w-full flex justify-end">
         <Button onClick={handleSubmit}>Submit</Button>
       </Box>
-      
-      </Container>
+      <Image src={'/Completed_Board.png'} alt={'Compelted Sudoku Board'} width="500" height="500" />
+    </Container>
   </>
   );
 }
