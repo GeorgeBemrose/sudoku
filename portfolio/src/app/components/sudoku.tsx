@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box';
-import { Button, Grid2, TextField } from '@mui/material';
+import { Button, ButtonBase, Card, CardActionArea, CardContent, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
+import classNames from 'classnames';
+
 
 export default function SudokuBoard() {
 
@@ -20,9 +22,13 @@ export default function SudokuBoard() {
             6, 2, 5], [6, 5, 2, 9, 1, 8, 7, 3, 4], [3, 4, 7, 5, 6, 2, 9, 8, 1]
     ]
 
+    let inputs: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9','X']
 
 
     let [sudoku, setSudoku] = useState<number[][]>(initial_sudoku);
+    let [selection, setSelection] = useState([0, 0]);
+    let [inputNumber, setInputNumber] = useState(0);
+
 
     const checkCols = (board: number[][]): boolean => {
         let sum: number;
@@ -96,19 +102,20 @@ export default function SudokuBoard() {
         }
     }
 
-    const handleChange = (indexi: number, indexj: number) => e => {
-        const value = e.target.value;
-        if (value.length > 1) {
-            return;
-        }
+    const handleChange = (value: string) => e => {
+  
         const nextSudoku = sudoku.map((grid, indexi_new) => {
-            if (indexi_new !== indexi) {
+            if (indexi_new !== selection[0]) {
                 return grid;
             }
             return grid.map((item, indexj_new) => {
 
-                if (indexj === indexj_new) {
-                    return Number(e.target.value);
+                if (indexj_new === selection[1]) {
+                    if(!isNaN(+value)){
+                        return Number(value);
+                    }else{
+                        return 0;
+                    }
                 }
                 return item;
 
@@ -117,28 +124,51 @@ export default function SudokuBoard() {
         setSudoku(nextSudoku)
     }
 
+    const handleSelection = (indexi: number, indexj: number) => e => {
+
+        if (initial_sudoku[indexi][indexj] === 0) {
+            setSelection([indexi, indexj])
+        }
+    }
+
     return (<>
 
-        <Box className="grid grid-cols-3 grid-rows-3">
+        <Box className="grid grid-cols-3 gap-4 p-4">
             {sudoku.map((i, indexi) => (
-                <div key={indexi} className="flex flex-wrap p-2">
+                <div key={indexi} className="grid grid-cols-3 grid-rows-3">
                     {i.map((j, indexj) => (
-                        <TextField
-                            onChange={handleChange(indexi, indexj)}
+                
+
+                        <Card
+                            className={classNames('text-center w-12.5 h-12.5 p-3 m-0.5', {
+                                'bg-blue-200': selection && selection[0] === indexi && selection[1] === indexj
+                            }, {
+                                'text-slate-400' :initial_sudoku[indexi][indexj] != 0
+                            })}
                             key={indexi + "," + indexj}
-                            value={j === 0 ? '' : j}
-                            autoComplete='off'
-                            size='small'
-                            disabled={initial_sudoku[indexi][indexj] != 0}
-                            className="size-10 w-1/3" />
+                            onClick={handleSelection(indexi, indexj)}
+
+                        >
+                            {j === 0 ? '' : j}
+                        </Card>
                     ))}
                 </div>
             ))}
         </Box>
-        <Box className="w-full flex justify-end">
-            <Button onClick={handleSubmit}>Submit</Button>
+        <Box className="flex justify-centre pb-10">
+            {inputs.map((value, index) => (
+                <IconButton
+                    size='medium'
+                    className='p-2 w-12'
+                    onClick={handleChange(value)}
+                    key={index}
+                >{value}</IconButton>
+            ))}
+
+            <Box className="w-full flex justify-end">
+                <Button onClick={handleSubmit}>Submit</Button>
+            </Box>
         </Box>
-        
 
     </>
     );
