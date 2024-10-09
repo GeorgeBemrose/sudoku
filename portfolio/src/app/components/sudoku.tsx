@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import { Button, ButtonBase, Card, CardActionArea, CardContent, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import Confetti from 'react-confetti'
 
 
 export default function SudokuBoard() {
@@ -28,6 +29,7 @@ export default function SudokuBoard() {
     let [sudoku, setSudoku] = useState<number[][]>(initial_sudoku);
     let [selection, setSelection] = useState([0, 0]);
     let [inputNumber, setInputNumber] = useState(0);
+    let [result, setResult] = useState(false);
 
 
     const checkCols = (board: number[][]): boolean => {
@@ -96,8 +98,10 @@ export default function SudokuBoard() {
     const handleSubmit = () => {
         let board = sudoku
         if (checkRows(board) && checkCols(board) && checkGrid(board)) {
+            setResult(false)
             console.log("true")
         } else {
+            setResult(true)
             console.log("false")
         }
     }
@@ -132,6 +136,8 @@ export default function SudokuBoard() {
     }
 
     return (<>
+        
+        {result ? <Confetti width={100} height={100}/> : ""}
 
         <Box className="grid grid-cols-3 gap-4 p-4">
             {sudoku.map((i, indexi) => (

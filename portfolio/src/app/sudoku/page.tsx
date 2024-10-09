@@ -5,11 +5,11 @@ import Image from 'next/image';
 import NavBar from '../../../components/NavBar';
 
 import SudokuBoard from '../components/sudoku';
-import { CssBaseline } from '@mui/material';
+import Confetti from 'react-confetti'
 
 
 export default function Sudoku() {
-
+  let result = true;
   return (<>
     <NavBar currentPage='Sudoku'/>
  
@@ -20,6 +20,7 @@ export default function Sudoku() {
     <Container 
       maxWidth="sm">
       
+      {result ? <Confetti width={screen} height={100}/> : ""}
 
       <SudokuBoard />
 
