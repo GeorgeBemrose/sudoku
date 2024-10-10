@@ -2,9 +2,11 @@ import Box from '@mui/material/Box';
 import { Button, ButtonBase, Card, CardActionArea, CardContent, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import StopWatch from './StopWatch';
+import PauseIcon from '@mui/icons-material/Pause';
 
 
-export default function SudokuBoard() {
+export default function SudokuBoard({ result, setResult }: { result: Boolean, setResult: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     let initial_sudoku: number[][] = [[0, 0, 4, 0, 5, 0, 9, 7, 3], [2, 0, 7, 4, 6, 0, 0, 0, 0], [8, 3, 0, 1, 0, 0, 4, 0, 0],
     [0, 0, 0, 0, 8, 0, 0, 0, 6], [0, 2, 6, 5, 7, 1, 0, 4, 0], [0, 1, 3, 0, 0, 0, 2, 5, 0],
@@ -22,12 +24,13 @@ export default function SudokuBoard() {
             6, 2, 5], [6, 5, 2, 9, 1, 8, 7, 3, 4], [3, 4, 7, 5, 6, 2, 9, 8, 1]
     ]
 
-    let inputs: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9','X']
+    let inputs: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
 
 
     let [sudoku, setSudoku] = useState<number[][]>(initial_sudoku);
     let [selection, setSelection] = useState([0, 0]);
     let [inputNumber, setInputNumber] = useState(0);
+    let [inProgress, setInProgress] = useState(true);
 
 
     const checkCols = (board: number[][]): boolean => {
@@ -96,14 +99,19 @@ export default function SudokuBoard() {
     const handleSubmit = () => {
         let board = sudoku
         if (checkRows(board) && checkCols(board) && checkGrid(board)) {
-            console.log("true")
+            setResult(true)
+            setInProgress(false)
+            
         } else {
-            console.log("false")
+            setResult(false)
+            
+
+            
         }
     }
 
     const handleChange = (value: string) => e => {
-  
+
         const nextSudoku = sudoku.map((grid, indexi_new) => {
             if (indexi_new !== selection[0]) {
                 return grid;
@@ -111,9 +119,9 @@ export default function SudokuBoard() {
             return grid.map((item, indexj_new) => {
 
                 if (indexj_new === selection[1]) {
-                    if(!isNaN(+value)){
+                    if (!isNaN(+value)) {
                         return Number(value);
-                    }else{
+                    } else {
                         return 0;
                     }
                 }
@@ -131,43 +139,74 @@ export default function SudokuBoard() {
         }
     }
 
-    return (<>
+    // Function to start the game
+    const resume = () => {
+        setInProgress(true);
+    };
 
-        <Box className="grid grid-cols-3 gap-4 p-4">
+    // Function to pause the game
+    const pause = () => {
+        setInProgress(false);
+    };
+
+
+    return (<>
+        <Box className="flex justify-between items-center w-full relative px-3">
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+                <StopWatch inProgress={inProgress} />
+            </div>
+            <div className="flex items-center justfy-center space-x-4 ml-auto">
+                <button
+                    onClick={inProgress ? pause : resume}
+
+                >
+                    <PauseIcon
+                        className="text-black hover:scale-150 transform transition-transform duration-200"
+                    />
+                </button>
+                <Box>
+                    <Button
+                        onClick={handleSubmit}
+                        className="bg-blue-500 text-white hover:bg-blue-700 font-bold py-1 px-3 rounded"
+                    >
+                        Submit
+                    </Button>
+                </Box>
+            </div>
+        </Box>
+
+        <Box className="grid grid-cols-3 gap-4 p-2">
             {sudoku.map((i, indexi) => (
                 <div key={indexi} className="grid grid-cols-3 grid-rows-3">
                     {i.map((j, indexj) => (
-                
+
 
                         <Card
                             className={classNames('text-center w-12.5 h-12.5 p-3 m-0.5', {
                                 'bg-blue-200': selection && selection[0] === indexi && selection[1] === indexj
                             }, {
-                                'text-slate-400' :initial_sudoku[indexi][indexj] != 0
+                                'text-slate-400': initial_sudoku[indexi][indexj] != 0
                             })}
                             key={indexi + "," + indexj}
                             onClick={handleSelection(indexi, indexj)}
 
                         >
-                            {j === 0 ? '' : j}
+                            {result ? (j === 0 ? '' : j) : (inProgress ? (j === 0 ? '' : j) : 'x')}
+                            {/* if result is true, and the game is paused, then display (j == 0 ? '': j), if the result is false and game is paused, then display x */}
                         </Card>
                     ))}
                 </div>
             ))}
         </Box>
-        <Box className="flex justify-centre pb-10">
+        <Box className="flex justify-center pb-10">
             {inputs.map((value, index) => (
                 <IconButton
                     size='medium'
-                    className='p-2 w-12'
+                    className='mx-1 w-12 bg-blue-500 text-white hover:bg-blue-700'
                     onClick={handleChange(value)}
                     key={index}
                 >{value}</IconButton>
             ))}
-
-            <Box className="w-full flex justify-end">
-                <Button onClick={handleSubmit}>Submit</Button>
-            </Box>
         </Box>
 
     </>
