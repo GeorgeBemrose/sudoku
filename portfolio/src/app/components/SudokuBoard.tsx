@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import StopWatch from './StopWatch';
 import PauseIcon from '@mui/icons-material/Pause';
+import { ChangeEvent, FormEvent } from '../../../types';
 
 
 export default function SudokuBoard({ result, setResult }: { result: Boolean, setResult: React.Dispatch<React.SetStateAction<boolean>> }) {
@@ -104,13 +105,13 @@ export default function SudokuBoard({ result, setResult }: { result: Boolean, se
             
         } else {
             setResult(false)
-            
+
 
             
         }
     }
 
-    const handleChange = (value: string) => e => {
+    const handleChange = (value: string) => () => {
 
         const nextSudoku = sudoku.map((grid, indexi_new) => {
             if (indexi_new !== selection[0]) {
@@ -132,7 +133,7 @@ export default function SudokuBoard({ result, setResult }: { result: Boolean, se
         setSudoku(nextSudoku)
     }
 
-    const handleSelection = (indexi: number, indexj: number) => e => {
+    const handleSelection = (indexi: number, indexj: number) => () => {
 
         if (initial_sudoku[indexi][indexj] === 0) {
             setSelection([indexi, indexj])

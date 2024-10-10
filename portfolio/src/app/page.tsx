@@ -1,72 +1,83 @@
+'use client'
+
 import Image from "next/image";
 import NavBar from "../../components/NavBar";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import { Button, Box, Typography, Container, Card } from '@mui/material';
 
 
-import HomeIcon from '@mui/icons-material/Home';
+
 
 
 import Link from 'next/link';
+import EmailButton from "../../components/EmailButton";
+import TechCards from "../../components/TechCards";
 
 export default function Home() {
   return (<>
-  <NavBar currentPage="Home"/>
-   
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1>George Bemrose</h1>
-        
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="/sudoku"
-            rel="noopener noreferrer"
-          >
-            
-            Sudoku
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Button 2
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://github.com/GeorgeBemrose"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Github
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.linkedin.com/in/georgebemrose/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          LinkedIn
-        </a>
-      </footer>
-    </div>
-    </>);
+    <Container
+      maxWidth={false}
+      className="bg-gradient-to-br from-sky-900 to-blue-800 min-h-screen"
+    >
+      <NavBar currentPage="Home" textColor="white" />
+      <Container
+        maxWidth="md">
+
+        <Box className="flex p-4">
+          <Box
+            className="w-1/2">
+            <Typography variant="h3">George Bemrose</Typography>
+            <Typography variant="h4">Full Stack Developer</Typography>
+            <TechCards/>
+          </Box>
+          <Box className="w-1/2">
+
+            <Box className="flex space-x-4 justify-center">
+              {/* LinkedIn Button */}
+              <Button
+                variant="contained"
+                className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full"
+                startIcon={<LinkedInIcon />}
+                target="_blank"
+                href="https://www.linkedin.com/in/georgebemrose/"
+              >
+                LinkedIn
+              </Button>
+
+              {/* GitHub Button */}
+              <Button
+                variant="contained"
+                className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-full"
+                startIcon={<GitHubIcon />}
+                target="_blank"
+                href="https://github.com/GeorgeBemrose"
+              >
+                GitHub
+              </Button>
+
+
+              <Button
+                variant="contained"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+                startIcon={<EmailIcon />}
+                href="mailto:georgebemrose@gmail.com"
+              >
+                Email
+              </Button>
+            </Box>
+            <Image src="/Headshot.png" alt='Headshot' width={100} height={100} // This is the base height
+              layout="responsive" // Automatically adjusts based on container width
+              className="rounded-lg p-4" />
+          </Box>
+        </Box>
+
+
+      </Container>
+    </Container>
+
+  </>);
 }
+

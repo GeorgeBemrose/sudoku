@@ -1,27 +1,37 @@
-import { AppBar, IconButton, Typography } from '@mui/material';
-import { Container } from '@mui/system';
-import HomeIcon from '@mui/icons-material/Home';
+import { AppBar, IconButton, Typography, Box } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 
 
-export default function NavBar({ currentPage }: { currentPage: string }) {
-  return (<AppBar position='static'>
-    <Container maxWidth="xl" className="flex justify-between">
-      <Typography variant="h3" className="justify-center py-1">{currentPage}</Typography>
-      {currentPage != "Home" ? <div className='place-self-end'>
-        <Link href="/">
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
+export default function NavBar({ currentPage, textColor }: { currentPage: string, textColor: string }) {
+  return (
+    <AppBar position='static' style={{ background: 'transparent', boxShadow: 'none' }}>
 
-            color="inherit"
-          >
-            <HomeIcon fontSize='large' />
-          </IconButton>
-        </Link>
-      </div> : null}
-    </Container>
-  </AppBar>);
+      <Box className="flex justify-between">
+
+        <Typography
+          variant="h4"
+          color={textColor}
+          className="justify-center">
+          {currentPage != "Home" ? currentPage : null}
+        </Typography>
+
+        <div className='place-self-end'>
+          <Link href="/">
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+
+              color="inherit"
+            >
+              <MenuIcon fontSize='large' />
+            </IconButton>
+          </Link>
+        </div>
+
+      </Box>
+
+    </AppBar>);
 }
