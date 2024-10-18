@@ -2,7 +2,7 @@
 
 import { Container } from '@mui/system';
 import Image from 'next/image';
-import NavBar from '../../../components/NavBar';
+import NavBar from '../components/NavBar';
 
 import PopUp from '../components/PopUp';
 import SudokuBoard from '../components/SudokuBoard';
