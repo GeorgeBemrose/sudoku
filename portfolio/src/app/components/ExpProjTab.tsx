@@ -2,6 +2,13 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import ExperienceTimeline from './ExperienceTimeline';
+import ProjectsList from './ProjectShowcase';
+
+import work_experience_data from '../data/work_experience.json'
+import projectsData from '../data/projects.json'
+import educationData from '../data/education.json'
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,7 +48,7 @@ export default function ExpProjTab() {
 
   return (
     <Box className="m-auto w-2/3">
-      <Box sx={{ borderBottom: 1, borderColor: 'secondary' }} className="justify-center">
+      <Box className="flex justify-center">
         <Tabs value={value} onChange={handleChange} aria-label="Tabs of experience, projects and education">
           <Tab label="Experience" {...a11yProps(0)} className='text-white'/>
           <Tab label="Projects" {...a11yProps(1)} className='text-white'/>
@@ -49,13 +56,13 @@ export default function ExpProjTab() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
+      <ExperienceTimeline data={work_experience_data} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <ProjectsList projects={projectsData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+      <ExperienceTimeline data={educationData} />
       </CustomTabPanel>
      
     </Box>

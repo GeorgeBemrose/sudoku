@@ -1,0 +1,9 @@
+[
+    {
+      "title": "Sudoku",
+      "description": "Sudoku app including a timer with pause and resume functionality, number panel and user-feedback upon correct submission. Future work would be to automatically create new grids and allow user accounts to allow for daily challenges.",
+      "techStack": ["React", "Next.js", "Typescript","Tailwind (CSS)"],
+      "imageUrl": "/Sudoku.png",
+      "link": "/sudoku"
+    }
+  ]

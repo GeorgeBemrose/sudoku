@@ -15,9 +15,9 @@ export default function Home() {
       maxWidth={false}
       className="bg-primary min-h-screen"
     >
-      <NavBar currentPage="Home" textColor="white" />
+      {/* <NavBar currentPage="Home" textColor="white" /> */}
       <Container
-        maxWidth="lg">
+        maxWidth="lg" className="pt-4">
 
         <Box className="md:flex p-4">
           <Box className="flex flex-col md: w-1/2 ">

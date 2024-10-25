@@ -18,7 +18,7 @@ const techStack = [
 export default function TechCards() {
   return (<>
   <Typography variant="h6" color="white">Tech Stack</Typography>
-    <Box className="grid grid-cols-8 pt-2 shadow-md rounded-lg border">
+    <Box className="grid grid-cols-8 pt-2 px-2 shadow-md rounded-lg border">
 
       {techStack.map((tech) => (
         <Box
