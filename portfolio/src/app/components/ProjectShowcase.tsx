@@ -18,13 +18,15 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   return (
-    <>
+    <Box className="w-1/2 pt-5">
+      <Typography variant="h6" color="white" className="pb-2">
+          Personal Projects
+      </Typography>
       {projects.map((project, index) => (
-        <Card className="flex mb-4"> 
+        <Card className="flex"> 
             <CardMedia
               component="img"
-              // sx={{ width: 151 }}
-              className='w-1/2 pr-2'
+              className='w-3/5 pr-2'
               image={project.imageUrl}
               alt="Live from space album cover"
             />
@@ -63,7 +65,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
       
         </Card> 
       ))}
-    </>
+    </Box>
   );
 };
 

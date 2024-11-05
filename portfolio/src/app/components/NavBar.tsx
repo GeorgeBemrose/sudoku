@@ -1,5 +1,6 @@
 import { AppBar, IconButton, Typography, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link';
 
 
@@ -26,7 +27,7 @@ export default function NavBar({ currentPage, textColor }: { currentPage: string
 
               color="inherit"
             >
-              <MenuIcon fontSize='large' />
+              <HomeIcon fontSize='large' color="primary"/>
             </IconButton>
           </Link>
         </div>

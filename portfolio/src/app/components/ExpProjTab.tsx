@@ -47,21 +47,21 @@ export default function ExpProjTab() {
   };
 
   return (
-    <Box className="m-auto w-2/3">
+    <Box className="w-1/2 p-3">
       <Box className="flex justify-center">
         <Tabs value={value} onChange={handleChange} aria-label="Tabs of experience, projects and education">
           <Tab label="Experience" {...a11yProps(0)} className='text-white'/>
-          <Tab label="Projects" {...a11yProps(1)} className='text-white'/>
-          <Tab label="Education" {...a11yProps(2)} className='text-white'/>
+          {/* <Tab label="Personal Projects" {...a11yProps(1)} className='text-white'/> */}
+          <Tab label="Education" {...a11yProps(1)} className='text-white'/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
       <ExperienceTimeline data={work_experience_data} />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+      {/* <CustomTabPanel value={value} index={1}>
         <ProjectsList projects={projectsData} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
+      </CustomTabPanel> */}
+      <CustomTabPanel value={value} index={1}>
       <ExperienceTimeline data={educationData} />
       </CustomTabPanel>
      

@@ -24,7 +24,7 @@ export default function Sudoku() {
       maxWidth={false}
       className="bg-emerald-200 min-h-screen flex flex-col p-5 text-black"
     >
-      <NavBar currentPage='Sudoku' textColor='black' />
+      <NavBar currentPage='Sudoku' textColor='blue' />
 
       <Container
         maxWidth="sm"
@@ -37,8 +37,7 @@ export default function Sudoku() {
 
         <SudokuBoard result={result} setResult={setResult} />
 
-        {/* <Image src={'/Completed_Board.png'} alt={'Compelted Sudoku Board'} width="500" height="500" /> */}
-      </Container>
+        </Container>
 
     </Container>
   </>
