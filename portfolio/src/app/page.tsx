@@ -1,72 +1,65 @@
+'use client'
+
 import Image from "next/image";
-import NavBar from "../../components/NavBar";
+import NavBar from "./components/NavBar";
+import { Button, Box, Typography, Container, Card } from '@mui/material';
+import TechCards from "./components/TechCards";
+import PlaceIcon from '@mui/icons-material/Place';
+import ContactBar from "./components/ContactBar";
+import ExpProjTab from "./components/ExpProjTab";
 
+import ProjectsList from './components/ProjectShowcase';
 
-import HomeIcon from '@mui/icons-material/Home';
-
-
-import Link from 'next/link';
+import projectsData from './data/projects.json'
 
 export default function Home() {
   return (<>
-  <NavBar currentPage="Home"/>
-   
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1>George Bemrose</h1>
-        
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="/sudoku"
-            rel="noopener noreferrer"
-          >
-            
-            Sudoku
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Button 2
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://github.com/GeorgeBemrose"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Github
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.linkedin.com/in/georgebemrose/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          LinkedIn
-        </a>
-      </footer>
-    </div>
-    </>);
+    <Container
+      maxWidth={false}
+      className="bg-primary min-h-screen"
+    >
+      {/* <NavBar currentPage="Home" textColor="white" /> */}
+      <Container
+        maxWidth="lg" className="pt-4">
+
+        <Box className="md:flex p-4">
+          <Box className="flex flex-col md: w-1/2 ">
+            <Box className="pb-4">
+              
+              <Typography variant="h2" color="white">George Bemrose</Typography>
+              <Typography variant="h5" color="white">Full Stack Developer</Typography>
+              <Box className="flex items-center">
+                <PlaceIcon sx={{ color: 'white' }} /> <Typography variant="h6" color="white">London, UK</Typography>
+              </Box>
+            </Box>
+            <Box>
+              <ContactBar />
+              <TechCards />
+            </Box>
+          </Box>
+
+          <Box className="md: w-1/2 m-auto">
+
+
+            <Image src="/Headshot.png" alt='Headshot'  // This is the base height
+              width={350}
+              height={350}
+
+              className="rounded-lg p-4 m-auto"
+              priority
+
+            />
+          </Box>
+        </Box>
+        <Box className="flex">
+          <ExpProjTab />
+          <ProjectsList projects={projectsData} />
+        </Box>
+
+      </Container>
+    </Container>
+
+  </>);
 }
+
