@@ -26,8 +26,9 @@ export default function Home() {
         <Box className="md:flex p-4">
           <Box className="flex flex-col md: w-1/2 ">
             <Box className="pb-4">
-              <Typography variant="h5" color="white">Full Stack Developer</Typography>
+              
               <Typography variant="h2" color="white">George Bemrose</Typography>
+              <Typography variant="h5" color="white">Full Stack Developer</Typography>
               <Box className="flex items-center">
                 <PlaceIcon sx={{ color: 'white' }} /> <Typography variant="h6" color="white">London, UK</Typography>
               </Box>
