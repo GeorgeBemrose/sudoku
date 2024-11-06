@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import { PopUpChildProps } from '../../../types';
 
 const MyComponent: React.FC<PopUpChildProps> = ({open, setOpen, title, content}) => {
-  const [count, setCount] = useState<number>(0);
 
   const handleClosePopup = () => {
     setOpen(false); // Close the popup

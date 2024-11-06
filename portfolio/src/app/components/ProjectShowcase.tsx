@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import Image from "next/image";
 
 // Define the type for each project
 interface Project {
@@ -11,7 +10,6 @@ interface Project {
   link: string;
 }
 
-// Define the prop type for the component
 interface ProjectShowcaseProps {
   projects: Project[];
 }
@@ -23,12 +21,11 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
           Personal Projects
       </Typography>
       {projects.map((project, index) => (
-        <Card className="flex"> 
+        <Card className="flex" key={index}> 
             <CardMedia
               component="img"
               className='w-3/5 pr-2'
               image={project.imageUrl}
-              alt="Live from space album cover"
             />
         
             <CardContent>

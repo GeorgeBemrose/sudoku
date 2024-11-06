@@ -24,9 +24,22 @@ interface TimelineEntryProps {
     organization: string;
     logo?: string;
     role: string;
-    description: string;
-    type: 'work' | 'education' | 'project'; // can be one of these three
+    description?: string;
+    type: string; 
   }
+
+  interface ExperienceData {
+    start: string;
+    end: string;
+    organization: string;
+    logo?: string; 
+    role: string;
+    description?: string;
+    location?: string; 
+    skills?: string[]; 
+    type: string; // You can make this more flexible if needed
+  }
+  
   
 
 // Reusable TimelineEntry component
@@ -91,7 +104,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({
 };
 
 // Main Timeline component that accepts data as props
-const ExperienceTimeline = ({ data }) => {
+const ExperienceTimeline = ({ data }: { data: ExperienceData[] }) => {
   return (
     <Timeline position="left">
       {data.map((entry, index) => (
@@ -99,6 +112,7 @@ const ExperienceTimeline = ({ data }) => {
       ))}
     </Timeline>
   );
+  
 };
 
 export default ExperienceTimeline;

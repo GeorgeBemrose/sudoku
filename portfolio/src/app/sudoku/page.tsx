@@ -1,19 +1,18 @@
 'use client'
 
 import { Container } from '@mui/system';
-import Image from 'next/image';
 import NavBar from '../components/NavBar';
 
 import PopUp from '../components/PopUp';
 import SudokuBoard from '../components/SudokuBoard';
 import Confetti from 'react-confetti'
 import useWindowSize from 'react-use/lib/useWindowSize'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function Sudoku() {
 
-  let [result, setResult] = useState(false);
+  const [result, setResult] = useState(false);
 
   const { width, height } = useWindowSize()
 
@@ -31,7 +30,7 @@ export default function Sudoku() {
         className="flex-grow mt-4"
         >
 
-        <PopUp open={result} setOpen={setResult} title={'Congratulations'} content={'Well done on completing the sudoku!'} />
+        <PopUp open={result} setOpen={()=> setResult(false)} title={'Congratulations'} content={'Well done on completing the sudoku!'} />
 
         {result ? <Confetti width={width} height={height} /> : ""}
 

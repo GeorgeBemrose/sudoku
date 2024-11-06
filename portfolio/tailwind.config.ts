@@ -1,11 +1,11 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  important: true,
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}", // Include all files inside /src/app
+    "./src/app/components/**/*.{js,ts,jsx,tsx}", // Explicitly include components folder
+    "./src/app/sudoku/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

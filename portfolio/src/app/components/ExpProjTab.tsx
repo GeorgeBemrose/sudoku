@@ -3,10 +3,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ExperienceTimeline from './ExperienceTimeline';
-import ProjectsList from './ProjectShowcase';
+
 
 import work_experience_data from '../data/work_experience.json'
-import projectsData from '../data/projects.json'
+
 import educationData from '../data/education.json'
 
 
@@ -51,16 +51,13 @@ export default function ExpProjTab() {
       <Box className="flex justify-center">
         <Tabs value={value} onChange={handleChange} aria-label="Tabs of experience, projects and education">
           <Tab label="Experience" {...a11yProps(0)} className='text-white'/>
-          {/* <Tab label="Personal Projects" {...a11yProps(1)} className='text-white'/> */}
           <Tab label="Education" {...a11yProps(1)} className='text-white'/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
       <ExperienceTimeline data={work_experience_data} />
       </CustomTabPanel>
-      {/* <CustomTabPanel value={value} index={1}>
-        <ProjectsList projects={projectsData} />
-      </CustomTabPanel> */}
+ 
       <CustomTabPanel value={value} index={1}>
       <ExperienceTimeline data={educationData} />
       </CustomTabPanel>

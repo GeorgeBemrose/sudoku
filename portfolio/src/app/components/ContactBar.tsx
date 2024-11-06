@@ -1,7 +1,7 @@
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
-import ArticleIcon from '@mui/icons-material/Article';
+// import ArticleIcon from '@mui/icons-material/Article';
 import { Button, Box, Typography } from '@mui/material';
 
 const contacts = [
@@ -22,6 +22,7 @@ export default function ContactBar() {
           startIcon={contact.icon}
           target="_blank"
           href={contact.href}
+          key={contact.name}
         >
           <Typography variant="body1">{contact.name}</Typography>
           
