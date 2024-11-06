@@ -19,7 +19,7 @@ const Stopwatch: React.FC<InProgressChildProps> = ({inProgress}) => {
     }
 
     return () => clearInterval(interval!); // Cleanup interval on unmount
-  }, [inProgress]);
+  }, [inProgress, time]);
 
 
   const formatTime = (time: number) => {
