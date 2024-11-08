@@ -16,41 +16,50 @@ export default function Home() {
 
     <Container
       maxWidth={false}
-      className="bg-primary min-h-screen"
+      className="bg-primary min-h-screen overflow-x-hidden max-w-full"
     >
       <Container
         maxWidth="lg" className="pt-4">
 
         <Box className="md:flex p-4">
-          <Box className="flex flex-col ">
-            <Box className="pb-4">
-              
-              <Typography variant="h2" color="white">George Bemrose</Typography>
-              <Typography variant="h5" color="white">Full Stack Developer</Typography>
-              <Box className="flex items-center">
-                <PlaceIcon sx={{ color: 'white' }} /> <Typography variant="h6" color="white">London, UK</Typography>
+          <Box className="flex flex-col md:w-1/2">
+
+            <Box className="flex flex-row pb-4">
+              <Box>
+                <Typography variant="h3" color="white" className="text-2xl sm:text-3xl md:text-5xl">George Bemrose</Typography>
+                <Typography variant="h5" color="white"className="text-1xl sm:text-2xl md:text-3xl">Full Stack Developer</Typography>
+                <Box className="flex items-center">
+                  <PlaceIcon sx={{ color: 'white' }} />
+                  <Typography variant="h6" color="white">London, UK</Typography>
+                </Box>
               </Box>
+              <Image src="/Headshot.png" alt='Headshot'
+                width={150}
+                height={150}
+
+                className="rounded-lg p-2 m-auto md:hidden self-start object-cover"
+                priority
+
+              />
             </Box>
+
             <Box>
               <ContactBar />
               <TechCards />
             </Box>
           </Box>
+<Box className="m-auto hidden  md:flex">
+          <Image src="/Headshot.png" alt='Headshot'
+            width={350}
+            height={350}
 
-          <Box className="md: w-1/2 m-auto">
+            className="rounded-lg m-auto hidden md:flex"
+            priority
 
-
-            <Image src="/Headshot.png" alt='Headshot'  // This is the base height
-              width={350}
-              height={350}
-
-              className="rounded-lg p-4 m-auto"
-              priority
-
-            />
-          </Box>
+          />
+</Box>
         </Box>
-        <Box className="flex">
+        <Box className="md:flex">
           <ExpProjTab />
           <ProjectsList projects={projectsData} />
         </Box>

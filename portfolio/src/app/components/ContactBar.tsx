@@ -18,13 +18,13 @@ export default function ContactBar() {
       {contacts.map((contact) => (
         <Button
           variant="contained"
-          className={`bg-${contact.color} hover:bg-${contact.hover} text-white font-bold mr-4 rounded-full`}
+          className={`bg-${contact.color} hover:bg-${contact.hover} text-white font-bold mr-4 rounded-full `}
           startIcon={contact.icon}
           target="_blank"
           href={contact.href}
           key={contact.name}
         >
-          <Typography variant="body1">{contact.name}</Typography>
+          <Typography variant="body1" className="text-sm sm:text-md md:text-lg">{contact.name}</Typography>
           
         </Button>
       ))}

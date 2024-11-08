@@ -47,7 +47,7 @@ export default function ExpProjTab() {
   };
 
   return (
-    <Box className="w-1/2 p-3">
+    <Box className="w-full md:w-2/3 p-3">
       <Box className="flex justify-center">
         <Tabs value={value} onChange={handleChange} aria-label="Tabs of experience, projects and education">
           <Tab label="Experience" {...a11yProps(0)} className='text-white'/>
