@@ -67,7 +67,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({
   return (
     <TimelineItem>
       <TimelineOppositeContent>
-        <Typography variant="body1" className='text-secondary'>
+        <Typography variant="body1" className='text-secondary text-sm sm:text-md md:text-lg'>
           {start} - {end || 'Present'}
         </Typography>
       </TimelineOppositeContent>
@@ -78,7 +78,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({
       <TimelineContent>
         <Box className="flex items-end  flex-col mb-2">
             
-          <Typography variant="h6" component="span" className='text-white'>
+          <Typography variant="h6" component="span" className='text-white text-sm sm:text-md md:text-xl'>
             {role} {organization && '@'}
           </Typography>
           
@@ -90,10 +90,10 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({
                 priority
                 
               />
-            ): <Typography variant="body1" className='text-white'>
+            ): <Typography variant="body1" className='text-secondary text-xs sm:text-s md:text-lg'>
             {organization}
           </Typography>}
-          <Typography variant="body2" className='text-white'>
+          <Typography variant="body2" className='text-white text-xs sm:text-s md:text-base'>
             {description}
         </Typography>
         

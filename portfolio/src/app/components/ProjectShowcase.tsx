@@ -16,15 +16,15 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   return (
-    <Box className="w-1/2 pt-5">
+    <Box className="md:w-1/2 pt-5">
       <Typography variant="h6" color="white" className="pb-2">
           Personal Projects
       </Typography>
       {projects.map((project, index) => (
-        <Card className="flex" key={index}> 
+        <Card className="" key={index}> 
             <CardMedia
               component="img"
-              className='w-3/5 pr-2'
+              className=' pr-2 object-cover'
               image={project.imageUrl}
             />
         
