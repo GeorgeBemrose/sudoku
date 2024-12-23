@@ -16,7 +16,7 @@ interface ProjectShowcaseProps {
 }
 
 // External function to handle link clicks
-const handleLinkClick = (link: string, router: any) => {
+const handleLinkClick = (link: string, router: ReturnType<typeof useRouter>) => {
   if (link.startsWith('/')) {
     router.push(link);
   } else {
